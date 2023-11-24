@@ -1,4 +1,4 @@
-import 'package:cache/http_tasks_repository.dart';
+import 'package:cache/dio_tasks_repository.dart';
 import 'package:cache/task.dart';
 import 'package:cache/tasks_repository.dart';
 import 'package:dio/dio.dart';
@@ -17,12 +17,13 @@ class MyApp extends StatelessWidget {
     final dio = Dio();
     dio.interceptors.add(DioCacheInterceptor(options: CacheOptions(store: MemCacheStore())));
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
+        colorScheme: ColorScheme.fromSeed(seedColor: Color(0xFF0E2356)),
         useMaterial3: true,
       ),
-      home: TasksPage(HttpTasksRepository()),
-      //home: TasksPage(DioTasksRepository(dio)),
+      //home: TasksPage(HttpTasksRepository()),
+      home: TasksPage(DioTasksRepository(dio)),
     );
   }
 }
@@ -41,8 +42,8 @@ class _TasksPageState extends State<TasksPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Text('Simple HTTP cache'),
+        backgroundColor: Theme.of(context).colorScheme.primary,
+        title: const Text('Simple HTTP cache', style: TextStyle(color: Colors.white),),
       ),
       body: FutureBuilder<List<Task>>(
         future: widget._repository.loadTasks(),
@@ -62,8 +63,9 @@ class _TasksPageState extends State<TasksPage> {
         },
       ),
       floatingActionButton: FloatingActionButton(
+        backgroundColor: Theme.of(context).colorScheme.primary,
         onPressed: () => setState(() {}),
-        child: const Icon(Icons.refresh),
+        child: const Icon(Icons.refresh, color: Colors.white,),
       ),
     );
   }
