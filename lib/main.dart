@@ -72,13 +72,31 @@ class _TasksPageState extends State<TasksPage> {
                 ),
               );
             } else {
-              return _TopThird(Text('Error'));
+              return _TopThird(_ErrorMessage());
             }
           } else {
             return _TopThird(CircularProgressIndicator());
           }
         },
       ),
+    );
+  }
+}
+
+class _ErrorMessage extends StatelessWidget {
+  const _ErrorMessage({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        const Icon(Icons.wifi_off, size: 42, color: Colors.red),
+        const SizedBox(height: 16),
+        const Text('Unable to load data', style: TextStyle(fontSize: 18)),
+      ],
     );
   }
 }
