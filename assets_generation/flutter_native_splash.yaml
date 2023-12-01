@@ -1,5 +1,5 @@
 # flutter pub run flutter_native_splash:create --path=assets_generation/flutter_native_splash.yaml
-
+# flutter pub run flutter_native_splash:remove --path=assets_generation/flutter_native_splash.yaml
 flutter_native_splash:
   image: "assets_generation/splash_screen/top.png"
   branding: "assets_generation/splash_screen/bottom.png"
