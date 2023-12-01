@@ -1,0 +1,11 @@
+# flutter pub run flutter_native_splash:create --path=assets_generation/flutter_native_splash.yaml
+
+flutter_native_splash:
+  image: "assets_generation/splash_screen/top.png"
+  branding: "assets_generation/splash_screen/bottom.png"
+  color: "#FFFFFF"
+
+  android_12:
+    image: "assets_generation/splash_screen/top.png"
+    color: "#FFFFFF"
+    icon_background_color: "#FFFFFF"
