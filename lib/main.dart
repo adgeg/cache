@@ -15,7 +15,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final dio = Dio();
-    dio.interceptors.add(DioCacheInterceptor(options: CacheOptions(store: MemCacheStore())));
+    dio.interceptors.add(
+      DioCacheInterceptor(
+        options: CacheOptions(
+          store: MemCacheStore(),
+          policy: CachePolicy.forceCache,
+        ),
+      ),
+    );
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
