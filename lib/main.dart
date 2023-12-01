@@ -58,26 +58,44 @@ class _TasksPageState extends State<TasksPage> {
       body: FutureBuilder<List<Task>>(
         future: widget._repository.loadTasks(),
         builder: (context, snapshot) {
-          if (snapshot.hasError) {
-            return Text('Error');
-          }
-          if (snapshot.hasData && snapshot.data != null) {
-            final data = snapshot.data!;
-            return RefreshIndicator.adaptive(
-              onRefresh: () async => setState(() {}),
-              child: ListView.builder(
-                itemCount: data.length,
-                itemBuilder: (context, index) => ListTile(
-                  title: Text(data[index].id),
-                  subtitle: Text(data[index].content),
+          if (snapshot.connectionState == ConnectionState.done) {
+            if (snapshot.hasData && snapshot.data != null) {
+              final data = snapshot.data!;
+              return RefreshIndicator.adaptive(
+                onRefresh: () async => setState(() {}),
+                child: ListView.builder(
+                  itemCount: data.length,
+                  itemBuilder: (context, index) => ListTile(
+                    title: Text(data[index].id),
+                    subtitle: Text(data[index].content),
+                  ),
                 ),
-              ),
-            );
+              );
+            } else {
+              return _TopThird(Text('Error'));
+            }
           } else {
-            return const Center(child: CircularProgressIndicator());
+            return _TopThird(CircularProgressIndicator());
           }
         },
       ),
+    );
+  }
+}
+
+class _TopThird extends StatelessWidget {
+  final Widget child;
+
+  const _TopThird(this.child);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Expanded(child: Center(child: child)),
+        Expanded(child: SizedBox.shrink()),
+        Expanded(child: SizedBox.shrink()),
+      ],
     );
   }
 }
