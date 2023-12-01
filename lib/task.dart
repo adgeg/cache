@@ -27,3 +27,7 @@ class Task {
     );
   }
 }
+
+extension TaskExt on Task {
+  bool get isCompleted => status == Status.done;
+}

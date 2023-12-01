@@ -65,10 +65,10 @@ class _TasksPageState extends State<TasksPage> {
                 onRefresh: () async => setState(() {}),
                 child: ListView.builder(
                   itemCount: data.length,
-                  itemBuilder: (context, index) => ListTile(
-                    title: Text(data[index].id),
-                    subtitle: Text(data[index].content),
-                  ),
+                  itemBuilder: (context, index) {
+                    final task = data[index];
+                    return ItemTile(task);
+                  },
                 ),
               );
             } else {
@@ -79,6 +79,38 @@ class _TasksPageState extends State<TasksPage> {
           }
         },
       ),
+    );
+  }
+}
+
+class ItemTile extends StatefulWidget {
+  const ItemTile(this.task);
+
+  final Task task;
+
+  @override
+  _ItemTileState createState() => _ItemTileState();
+}
+
+class _ItemTileState extends State<ItemTile> {
+  bool isChecked = false;
+
+  @override
+  void initState() {
+    isChecked = widget.task.isCompleted;
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return CheckboxListTile(
+      title: Text(widget.task.content),
+      value: isChecked,
+      onChanged: (value) {
+        setState(() {
+          isChecked = value!;
+        });
+      },
     );
   }
 }
