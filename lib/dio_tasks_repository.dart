@@ -12,10 +12,7 @@ class DioTasksRepository implements TasksRepository {
   @override
   Future<List<Task>> loadTasks() async {
     await Future.delayed(Duration(seconds: 1));
-    try {
-      final response = await _dio.get('$baseUrl/tasks');
-      return List<Task>.from(response.data.map((task) => Task.fromJson(task)));
-    } catch (_) {}
-    return [];
+    final response = await _dio.get('$baseUrl/tasks');
+    return List<Task>.from(response.data.map((task) => Task.fromJson(task)));
   }
 }

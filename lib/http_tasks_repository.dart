@@ -10,10 +10,7 @@ class HttpTasksRepository implements TasksRepository {
   @override
   Future<List<Task>> loadTasks() async {
     await Future.delayed(Duration(seconds: 1));
-    try {
-      final response = await http.get(Uri.parse("$baseUrl/tasks"));
-      return List<Task>.from(json.decode(response.body).map((task) => Task.fromJson(task)));
-    } catch (_) {}
-    return [];
+    final response = await http.get(Uri.parse("$baseUrl/tasks"));
+    return List<Task>.from(json.decode(response.body).map((task) => Task.fromJson(task)));
   }
 }
