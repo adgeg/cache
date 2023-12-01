@@ -43,29 +43,33 @@ class _TasksPageState extends State<TasksPage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.primary,
-        title: const Text('Simple HTTP cache', style: TextStyle(color: Colors.white),),
+        title: const Text(
+          'Simple HTTP cache',
+          style: TextStyle(color: Colors.white),
+        ),
       ),
       body: FutureBuilder<List<Task>>(
         future: widget._repository.loadTasks(),
         builder: (context, snapshot) {
+          if (snapshot.hasError) {
+            return Text('Error');
+          }
           if (snapshot.hasData && snapshot.data != null) {
             final data = snapshot.data!;
-            return ListView.builder(
-              itemCount: data.length,
-              itemBuilder: (context, index) => ListTile(
-                title: Text(data[index].id),
-                subtitle: Text(data[index].content),
+            return RefreshIndicator.adaptive(
+              onRefresh: () async => setState(() {}),
+              child: ListView.builder(
+                itemCount: data.length,
+                itemBuilder: (context, index) => ListTile(
+                  title: Text(data[index].id),
+                  subtitle: Text(data[index].content),
+                ),
               ),
             );
           } else {
             return const Center(child: CircularProgressIndicator());
           }
         },
-      ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Theme.of(context).colorScheme.primary,
-        onPressed: () => setState(() {}),
-        child: const Icon(Icons.refresh, color: Colors.white,),
       ),
     );
   }
