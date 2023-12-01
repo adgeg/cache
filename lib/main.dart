@@ -79,14 +79,23 @@ class _TasksPageState extends State<TasksPage> {
           }
         },
       ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Theme.of(context).colorScheme.primary,
-        onPressed: () => setState(() {}),
-        child: const Icon(
-          Icons.refresh,
-          color: Colors.white,
-        ),
-      ),
+    );
+  }
+}
+
+class _TopThird extends StatelessWidget {
+  final Widget child;
+
+  const _TopThird(this.child);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Expanded(child: Center(child: child)),
+        Expanded(child: SizedBox.shrink()),
+        Expanded(child: SizedBox.shrink()),
+      ],
     );
   }
 }
