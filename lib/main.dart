@@ -72,7 +72,7 @@ class _TasksPageState extends State<TasksPage> {
                 ),
               );
             } else {
-              return _TopThird(_ErrorMessage());
+              return _TopThird(_ErrorMessage(() => setState(() {})));
             }
           } else {
             return _TopThird(CircularProgressIndicator());
@@ -116,9 +116,9 @@ class _ItemTileState extends State<ItemTile> {
 }
 
 class _ErrorMessage extends StatelessWidget {
-  const _ErrorMessage({
-    super.key,
-  });
+  final VoidCallback onPressed;
+
+  const _ErrorMessage(this.onPressed);
 
   @override
   Widget build(BuildContext context) {
@@ -128,6 +128,11 @@ class _ErrorMessage extends StatelessWidget {
         const Icon(Icons.wifi_off, size: 42, color: Colors.red),
         const SizedBox(height: 16),
         const Text('Unable to load data', style: TextStyle(fontSize: 18)),
+        const SizedBox(height: 16),
+        OutlinedButton(
+          onPressed: onPressed,
+          child: const Text('Retry', style: TextStyle(fontSize: 18)),
+        ),
       ],
     );
   }
