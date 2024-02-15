@@ -1,9 +1,10 @@
+import 'package:cache/content.dart';
 import 'package:flutter/material.dart';
 
-class Page extends StatelessWidget {
-  final ViewModel viewModel;
+class HomePage extends StatelessWidget {
+  final HomeViewModel viewModel;
 
-  const Page(this.viewModel);
+  const HomePage(this.viewModel);
 
   @override
   Widget build(BuildContext context) {
@@ -14,35 +15,77 @@ class Page extends StatelessWidget {
     } else if (viewModel.data != null) {
       return Content(viewModel.data!);
     } else {
-      return SizedBox.shrink(); // Should never happen
+      return SizedBox.shrink(); // Impossible
     }
   }
 }
 
-class ViewModel {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+class HomeViewModel {
   final bool isLoading;
   final String? errorMessage;
   final List<String>? data;
 
-  ViewModel({
+  HomeViewModel({
     required this.isLoading,
     required this.errorMessage,
     required this.data,
   });
 }
 
-class Content extends StatelessWidget {
-  final List<String> children;
 
-  const Content(this.children);
 
-  @override
-  Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: children.length,
-      itemBuilder: (context, index) {
-        return Text(children[index]);
-      },
-    );
-  }
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

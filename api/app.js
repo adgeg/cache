@@ -23,7 +23,7 @@ app.get('/tasks', function (req, res, next) {
     { id: '3', content: 'Add to my Flutter app', status:'DONE'},
     { id: '4', content: 'Et voilà!', status:'TO_DO'}
   ])
-});*/
+})*/
 
 
 app.listen(port, () => { console.log(`Simple tasks API with node.js and Express`) })

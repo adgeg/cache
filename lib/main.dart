@@ -1,4 +1,5 @@
 import 'package:cache/dio_tasks_repository.dart';
+import 'package:cache/resolution_page.dart';
 import 'package:cache/tasks_page.dart';
 import 'package:dio/dio.dart';
 import 'package:dio_cache_interceptor/dio_cache_interceptor.dart';
@@ -29,7 +30,16 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       //home: TasksPage(HttpTasksRepository()),
-      home: TasksPage(DioTasksRepository(dio)),
+      home: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Theme.of(context).colorScheme.primary,
+          title: const Text(
+            '2024 resolutions',
+            style: TextStyle(color: Colors.white),
+          ),
+        ),
+        body: ResolutionListPage(),
+      )
     );
   }
 }
